@@ -168,7 +168,7 @@ def breadthFirstSearch(problem):
 def depthFirstSearch(problem): 
 
     "*** YOUR CODE HERE ***"   
-    util.raiseNotDefined()
+    # util.raiseNotDefined()
 
 def nullHeuristic(state, problem=None):
     """
@@ -198,18 +198,18 @@ def iterativeDeepeningSearch(problem):
 
     """
     "*** YOUR CODE HERE ***"
-    util.raiseNotDefined()
+    # util.raiseNotDefined()
     
 def UniformCostSearch(problem):
     """Search the node that has the lowest path cost first."""
     "*** YOUR CODE HERE ***"  
-    util.raiseNotDefined()
+    # util.raiseNotDefined()
     
 
 def aStarSearch(problem, heuristic=nullHeuristic):
     """Search the node that has the lowest combined cost and heuristic first."""
     "*** YOUR CODE HERE ***"
-    util.raiseNotDefined()
+    # util.raiseNotDefined()
 
 # Abbreviations
 bfs = breadthFirstSearch
