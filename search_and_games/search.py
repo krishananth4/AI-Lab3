@@ -128,7 +128,42 @@ def breadthFirstSearch(problem):
     You are not required to implement this, but you may find it useful for Q5.
     """
     "*** YOUR CODE HERE ***"
-    util.raiseNotDefined()
+    # Initialize a queue for BFS traversal
+    frontier = util.Queue()
+    # Initialize a set to keep track of visited nodes
+    visited = set()
+    # Initialize the starting node
+    start_node = problem.getStartState()
+    # Enqueue the starting node into the frontier queue
+    frontier.push((start_node, []))
+
+    # Continue BFS traversal until the frontier queue is empty
+    while not frontier.isEmpty():
+        # Dequeue a node from the frontier queue
+        current_node, actions = frontier.pop()
+
+        # Check if the current node is the goal state
+        if problem.goalTest(current_node):
+            # If it is, return the list of actions to reach the goal
+            return actions
+
+        # If the current node has not been visited yet
+        if current_node not in visited:
+            # Mark the current node as visited
+            visited.add(current_node)
+
+            # Expand the current node by generating its successors
+            for action in problem.getActions(current_node):
+                # Get the successor state resulting from applying the action
+                successor = problem.getResult(current_node, action)
+                # Append the action to the list of actions taken so far
+                next_actions = actions + [action]
+                # Enqueue the successor node into the frontier queue
+                frontier.push((successor, next_actions))
+
+    # If no solution is found, return an empty list
+    return []
+    # util.raiseNotDefined()
     
 def depthFirstSearch(problem): 
 
