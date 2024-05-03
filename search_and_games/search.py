@@ -209,6 +209,69 @@ def UniformCostSearch(problem):
 def aStarSearch(problem, heuristic=nullHeuristic):
     """Search the node that has the lowest combined cost and heuristic first."""
     "*** YOUR CODE HERE ***"
+    # Import searchAgents.py to include manhattanHeuristic method 
+    import searchAgents
+    heuristic = searchAgents.manhattanHeuristic
+    # Initialize a list of actions that provides information on the steps it took to get to a node
+    actionsList = []
+    # Here a set is initialized to keep track of the nodes that have been visited
+    visited = set()
+    # The frontier is implemented as a Priority Queue where the class is defined in util.py
+    frontier = util.PriorityQueue()
+    # The frontier set is used to keep track of the nodes in the frontier Priority Queue
+    frontierSet = set()
+    # The start node is initialized and calls the start state method to get the start node
+    startNode = problem.getStartState()
+    # The g Function is initalized to 0, which will be used in calculation of the total cost
+    gFunction = 0
+    # The h function is initalized at the start state where heuristic() calculates the heurstic value of the start state. This uses the manhattanHeuristic.
+    hFunction = heuristic(startNode, problem)
+    # The start node and current list of actions tuple is pushed onto the frontier along with the priority stated by the heuristic cost. This is first node that is kept track of in the frontier.
+    frontier.push((startNode, actionsList), hFunction)
+    # Simultaneously, the start ndoe is added to the frontier set
+    frontierSet.add(startNode)
+
+    # If the frontier is empty then we return an empty list because there is no further actions to take
+    if frontier.isEmpty():
+        return []
+
+    # Until the frontier is not empty
+    while not frontier.isEmpty():
+
+        # The current visited node is popped from the frontier and the actions are taken accounted for
+        currentVisitingNode, actions = frontier.pop()
+
+        # If the current visited node is a goal node then we return the list of actions to get to that node
+        if problem.goalTest(currentVisitingNode):
+            return actions
+        
+        # If the current visiting node has not been visited in previous iterations, then we add this node to the visited set
+        if currentVisitingNode not in visited:
+            visited.add(currentVisitingNode)
+
+        # Here we loop through to see the actions we can take from the current visiting node
+        for action in problem.getActions(currentVisitingNode):
+            # The action we can take from the current visiting node results in getting the successor (which is a child to the current visiting node)
+            successor = problem.getResult(currentVisitingNode, action)
+            # Add the action that was just taken onto the list of actions, which continues to keep track of all the actions we have taken so far
+            actionsList = actions + [action]
+            # The g function is calculated to keep track of the path cost from the start node to the successor (getCostOfActions() helper function is used to simplify this process)
+            gFunction = problem.getCostOfActions(actionsList)
+            # The h function calculates the heuristic value of the successor to the goal node, which is the estimated cheapest cost to get from a a given node to the goal node. This is using the manhattanHeuristic.
+            hFunction = heuristic(successor, problem)
+            # The total cost (f(n)) is then calcuated by adding the heursitic value and the path cost from the start node 
+            totalCost = gFunction + hFunction
+            
+            # Here we do a check to ensure the successor is not in the frontier and not in the visited set because we don't want to add an already visited node to the frontier
+            if successor not in visited and successor not in frontierSet:
+                # Then we add the successor onto the frontier priority queue with the priority as the total cost of the actions
+                frontier.push((successor, actionsList), totalCost)
+                # Simultaneously, we also add the successor onto the frontier set using the add() method
+                frontierSet.add(successor)
+    
+    # Otherwise, if we have no goal node, then return an empty list symbolizing that no actions have been taken
+    return []
+
     # util.raiseNotDefined()
 
 # Abbreviations

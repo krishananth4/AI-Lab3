@@ -45,6 +45,7 @@ from game import Directions
 from game import Actions
 from util import nearestPoint
 from util import manhattanDistance
+from searchAgents import SearchAgent
 import util
 import layout
 import sys
