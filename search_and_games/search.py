@@ -152,14 +152,14 @@ def breadthFirstSearch(problem):
             # Mark the current node as visited
             visited.add(current_node)
 
-            # Expand the current node by generating its successors
-            for action in problem.getActions(current_node):
-                # Get the successor state resulting from applying the action
-                successor = problem.getResult(current_node, action)
-                # Append the action to the list of actions taken so far
-                next_actions = actions + [action]
-                # Enqueue the successor node into the frontier queue
-                frontier.push((successor, next_actions))
+        # Expand the current node by generating its successors
+        for action in problem.getActions(current_node):
+            # Get the successor state resulting from applying the action
+            successor = problem.getResult(current_node, action)
+            # Append the action to the list of actions taken so far
+            next_actions = actions + [action]
+            # Enqueue the successor node into the frontier queue
+            frontier.push((successor, next_actions))
 
     # If no solution is found, return an empty list
     return []
