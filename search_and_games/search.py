@@ -209,7 +209,7 @@ def UniformCostSearch(problem):
 def aStarSearch(problem, heuristic=nullHeuristic):
     """Search the node that has the lowest combined cost and heuristic first."""
     "*** YOUR CODE HERE ***"
-    # Import searchAgents.py to include manhattanHeuristic method 
+    # Locally import searchAgents.py to include manhattanHeuristic method 
     import searchAgents
     heuristic = searchAgents.manhattanHeuristic
     # Initialize a list of actions that provides information on the steps it took to get to a node
@@ -238,7 +238,7 @@ def aStarSearch(problem, heuristic=nullHeuristic):
     # Until the frontier is not empty
     while not frontier.isEmpty():
 
-        # The current visited node is popped from the frontier and the actions are taken accounted for
+        # The node is popped from the frontier and stored in the currentVisitingNode and the actions are taken accounted for
         currentVisitingNode, actions = frontier.pop()
 
         # If the current visited node is a goal node then we return the list of actions to get to that node
