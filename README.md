@@ -1,2 +1,2 @@
-# Lab2
-Pacman Lab 2
+# AI-Lab3
+Pacman Lab 3
